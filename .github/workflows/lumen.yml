@@ -15,7 +15,7 @@ jobs:
       mysql:
         image: mysql:latest
         env:
-          MYSQL_DATABASE: tests
+          MYSQL_DATABASE: bookr_testing
           MYSQL_HOST: 127.0.0.1
           MYSQL_USER: homestead
           MYSQL_PASSWORD: secret
