@@ -1,16 +1,18 @@
 {
-    "name": "laravel/lumen",
-    "description": "The Laravel Lumen Framework.",
+    "name": "bookr",
+    "description": "Simple RESTful API.",
     "keywords": ["framework", "laravel", "lumen"],
     "license": "MIT",
     "type": "project",
     "require": {
         "php": "^8.0",
-        "laravel/lumen-framework": "^9.0"
+        "laravel/lumen-framework": "^9.0",
+        "phpstan/phpstan": "^1.4"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
         "mockery/mockery": "^1.4.4",
+        "phpstan/phpstan-strict-rules": "^1.1",
         "phpunit/phpunit": "^9.5.10"
     },
     "autoload": {

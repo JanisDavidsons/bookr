@@ -1,0 +1,12 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Call to an undefined static method App\\\\Models\\\\User\\:\\:where\\(\\)\\.$#"
+			count: 1
+			path: app/Providers/AuthServiceProvider.php
+
+		-
+			message: "#^Cannot access offset 'auth' on Illuminate\\\\Contracts\\\\Foundation\\\\Application\\.$#"
+			count: 1
+			path: app/Providers/AuthServiceProvider.php
+

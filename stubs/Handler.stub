@@ -1,0 +1,11 @@
+<?php
+
+namespace Laravel\Lumen\Exceptions;
+
+class Handler
+{
+    /**
+     * @var string[]
+     */
+    protected $dontReport = [];
+}

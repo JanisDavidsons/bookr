@@ -1,0 +1,11 @@
+<?php
+
+namespace Illuminate\Database\Eloquent;
+
+class Model
+{
+    /**
+     * @var string[]
+     */
+    protected $hidden = [];
+}

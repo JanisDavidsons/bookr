@@ -1,0 +1,12 @@
+includes:
+    - ./vendor/phpstan/phpstan-strict-rules/rules.neon
+    - phpstan-baseline.neon
+parameters:
+    level: max
+    paths:
+        - app
+    stubFiles:
+    	- stubs/Model.stub
+    	- stubs/EventServiceProvider.stub
+    	- stubs/Handler.stub
+    	- stubs/Kernel.stub

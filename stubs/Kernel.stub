@@ -1,0 +1,11 @@
+<?php
+
+namespace Laravel\Lumen\Console;
+
+class Kernel
+{
+    /**
+     * @var string[]
+     */
+    protected $commands = [];
+}

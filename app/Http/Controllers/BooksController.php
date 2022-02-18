@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Book;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class BooksController extends Controller
@@ -16,11 +18,12 @@ class BooksController extends Controller
         //
     }
 
-    public function index(Request $request): array
+    /**
+     * @param Request $request
+     * @return Collection<int, Book>
+     */
+    public function index(Request $request): Collection
     {
-        return [
-            ['title' => 'War of the Worlds'],
-            ['title' => 'A Wikle in Time']
-        ];
+        return Book::all();
     }
 }

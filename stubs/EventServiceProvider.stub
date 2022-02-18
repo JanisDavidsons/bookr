@@ -1,0 +1,11 @@
+<?php
+
+namespace Laravel\Lumen\Providers;
+
+class EventServiceProvider
+{
+    /**
+     * @var array<string,array<int,string>>
+     */
+    protected $listen = [];
+}
