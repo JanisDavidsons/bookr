@@ -23,7 +23,7 @@ class BooksControllerTest extends TestCase
             'title' => 'War of the Worlds'
         ])
         ->seeJson([
-            'title' => 'A Wikle in Time'
+            'title' => 'A Winkle in Time'
         ]);
     }
 }
