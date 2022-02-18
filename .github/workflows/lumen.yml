@@ -39,5 +39,7 @@ jobs:
         run: php artisan migrate --force
       - name: run phpstan
         run: vendor/bin/phpstan
+      - name: seed database
+        run: php artisan db:seed
       - name: run tests
         run: vendor/bin/phpunit
