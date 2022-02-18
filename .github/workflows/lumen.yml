@@ -40,6 +40,6 @@ jobs:
       - name: run phpstan
         run: vendor/bin/phpstan
       - name: seed database
-        run: php artisan db:seed
+        run: php artisan db:seed --force
       - name: run tests
         run: vendor/bin/phpunit
