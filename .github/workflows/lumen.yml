@@ -28,9 +28,13 @@ jobs:
       - uses: nanasess/setup-php@master
         with:
           php-version: '8.0'
-      - name: Copy .env
-        run: |
-          php -r "file_exists('.env') || copy('.env.example.github', '.env');"
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          DB_USERNAME: homestead
+          DB_PASSWORD: secret
+          file_name: .env
+          fail_on_empty: false
       - name: Update Composer
         run: sudo composer self-update 1.10.15 --no-interaction
       - name: Run Composer Install
