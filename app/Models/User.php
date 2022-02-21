@@ -22,7 +22,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      *
      * @var string[]
      */
-    protected array $fillable = [
+    // phpcs:ignore
+    protected $fillable = [
         'name', 'email',
     ];
 
@@ -31,7 +32,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      *
      * @var string[]
      */
-    protected array $hidden = [
+    // phpcs:ignore
+    protected $hidden = [
         'password',
     ];
 }

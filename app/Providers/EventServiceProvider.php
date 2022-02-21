@@ -15,7 +15,8 @@ class EventServiceProvider extends ServiceProvider
      *
      * @var array<string,array<int,string>>
      */
-    protected array $listen = [
+    // phpcs:ignore
+    protected $listen = [
         ExampleEvent::class => [
             ExampleListener::class,
         ],

@@ -67,19 +67,23 @@ class BooksControllerTest extends TestCase
         );
     }
 
+    public function testStoreShouldSaveNewBookInDatabase(): void
+    {
+        $this->post('books', [
+            'id'          => 1,
+            'title'       => 'The Invisible Man',
+            'description' => 'An invisible man is trapped in the terror of his own creation',
+            'author'      => 'H. G. Wells',
+        ]);
 
-//    public function testStoreShouldSaveNewBookInDatabase(): void
-//    {
-//        $this->post('books', [
-//            'id'          => 1,
-//            'title'       => 'War of the Worlds',
-//            'description' => 'A science fiction masterpiece about Martians invading London',
-//            'author'      => 'H. G. Wells',
-//        ]);
-//    }
-//
-//    public function testStoreShouldRespondWith201AndLocationHeader(): void
-//    {
-//        $this->markTestIncomplete('pending');
-//    }
+        $this->seeJson(['created' => true]);
+        $this->seeInDatabase('books', [
+            'title' => 'The Incisib',
+        ]);
+    }
+
+    public function testStoreShouldRespondWith201AndLocationHeader(): void
+    {
+        $this->markTestIncomplete('pending');
+    }
 }
