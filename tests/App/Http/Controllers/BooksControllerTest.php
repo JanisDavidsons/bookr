@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\App\Http\Controllers;
 
 use Tests\TestCase;
@@ -11,19 +13,73 @@ class BooksControllerTest extends TestCase
      *
      * @return void
      */
-    public function test_index_status_code_should_be_200()
+    public function testIndexStatusCodeShouldBe200()
     {
         $this->get('/books')->seeStatusCode(200);
     }
 
-    public function test_index_should_return_a_collection_of_records(): void
+    public function testIndexShouldReturnACollectionOfRecords(): void
     {
         $this->get('/books')
         ->seeJson([
-            'title' => 'War of the Worlds'
+            'title' => 'War of the Worlds',
         ])
         ->seeJson([
-            'title' => 'A Winkle in Time'
+            'title' => 'A Winkle in Time',
         ]);
     }
+
+    public function testShouldReturnAValidBook(): void
+    {
+        $this->get('books/1')
+            ->seeStatusCode(200)
+            ->seeJson([
+                'id'          => 1,
+                'title'       => 'War of the Worlds',
+                'description' => 'A science fiction masterpiece about Martians invading London',
+                'author'      => 'H. G. Wells',
+            ]);
+
+        $data = json_decode($this->response->getContent(), true);
+        $this->assertArrayHasKey('created_at', $data);
+        $this->assertArrayHasKey('updated_at', $data);
+    }
+
+    public function testShouldFailWhenBookIdDoesNotExist(): void
+    {
+        $this->get('books/999999')
+            ->seeStatusCode(404)
+            ->seeJson([
+                'error' => [
+                    'message' => 'Book not found',
+                ],
+            ]);
+    }
+
+    public function testShowRouteShouldNotMatchAnInvalidRoute(): void
+    {
+        $this->get('/books/this-is-invalid');
+
+        $this->assertDoesNotMatchRegularExpression(
+            '/Book not found/',
+            $this->response->getContent(),
+            'BooksController@show rout matching when it should not.',
+        );
+    }
+
+
+//    public function testStoreShouldSaveNewBookInDatabase(): void
+//    {
+//        $this->post('books', [
+//            'id'          => 1,
+//            'title'       => 'War of the Worlds',
+//            'description' => 'A science fiction masterpiece about Martians invading London',
+//            'author'      => 'H. G. Wells',
+//        ]);
+//    }
+//
+//    public function testStoreShouldRespondWith201AndLocationHeader(): void
+//    {
+//        $this->markTestIncomplete('pending');
+//    }
 }

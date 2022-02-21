@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Providers;
 
 use App\Events\ExampleEvent;
@@ -13,7 +15,7 @@ class EventServiceProvider extends ServiceProvider
      *
      * @var array<string,array<int,string>>
      */
-    protected $listen = [
+    protected array $listen = [
         ExampleEvent::class => [
             ExampleListener::class,
         ],

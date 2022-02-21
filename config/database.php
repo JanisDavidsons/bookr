@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Support\Str;
 
 return [
@@ -113,7 +115,7 @@ return [
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'lumen'), '_').'_database_'),
+            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'lumen'), '_') . '_database_'),
         ],
 
         'default' => [
@@ -140,6 +142,6 @@ return [
         'port' => env('TESTING_DB_PORT', '3306'),
         'database' => env('TESTING_DB_DATABASE', 'bookr_testing'),
         'username' => env('TESTING_DB_USERNAME', 'homestead'),
-        'password' => env('TESTING_DB_PASSWORD', 'secret')
-    ]
+        'password' => env('TESTING_DB_PASSWORD', 'secret'),
+    ],
 ];

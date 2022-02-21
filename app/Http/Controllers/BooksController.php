@@ -1,29 +1,40 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Book;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\JsonResponse;
+use Laravel\Lumen\Routing\Controller;
 
 class BooksController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * @return Collection<int, Book>
      */
-    public function __construct()
+    public function index(): Collection
     {
-        //
+        return Book::all();
     }
 
     /**
-     * @param Request $request
-     * @return Collection<int, Book>
+     * @return Builder|Builder[]|Collection<int, Model>|Model|JsonResponse|null
      */
-    public function index(Request $request): Collection
+    public function show(int $id)
     {
-        return Book::all();
+        try {
+            return Book::query()->findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return new JsonResponse([
+                'error' => [
+                    'message' => 'Book not found',
+                ],
+            ], 404);
+        }
     }
 }
