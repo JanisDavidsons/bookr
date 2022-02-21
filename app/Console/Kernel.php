@@ -14,7 +14,8 @@ class Kernel extends ConsoleKernel
      *
      * @var array<string>
      */
-    protected array $commands = [
+    // phpcs:ignore
+    protected $commands = [
         //
     ];
 
