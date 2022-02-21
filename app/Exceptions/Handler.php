@@ -1,9 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Exceptions;
 
+use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,6 +21,7 @@ class Handler extends ExceptionHandler
      *
      * @var array<string>
      */
+    // phpcs:ignore
     protected $dontReport = [
         AuthorizationException::class,
         HttpException::class,
@@ -29,10 +34,11 @@ class Handler extends ExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param  \Throwable  $exception
-     * @return void
+     * @param Throwable $exception
      *
-     * @throws \Exception
+     * @throws Exception
+     *
+     * @return void
      */
     public function report(Throwable $exception)
     {
@@ -42,10 +48,10 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Throwable  $exception
+     * @param Request $request
+     * @param Throwable $exception
      *
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function render($request, Throwable $exception): Response
     {
