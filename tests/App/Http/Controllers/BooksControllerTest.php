@@ -78,12 +78,19 @@ class BooksControllerTest extends TestCase
 
         $this->seeJson(['created' => true]);
         $this->seeInDatabase('books', [
-            'title' => 'The Incisib',
+            'title' => 'The Invisible Man',
         ]);
     }
 
     public function testStoreShouldRespondWith201AndLocationHeader(): void
     {
-        $this->markTestIncomplete('pending');
+        $this->post('books', [
+            'id'          => 1,
+            'title'       => 'The Invisible Man',
+            'description' => 'An invisible man is trapped in the terror of his own creation',
+            'author'      => 'H. G. Wells',
+        ]);
+
+        $this->seeStatusCode(201)->seeHeaderWithRegExp('Location', '#/books/[\d]+$#');
     }
 }

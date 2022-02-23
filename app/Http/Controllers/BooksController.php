@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller;
 
 class BooksController extends Controller
@@ -36,5 +37,17 @@ class BooksController extends Controller
                 ],
             ], 404);
         }
+    }
+
+    public function create(Request $request): JsonResponse
+    {
+        /**
+         * @var Book
+         */
+        $book = Book::query()->create($request->all());
+
+        return new JsonResponse(['created' => true], 201, [
+            'Location' => route('books.show', ['id' => $book->id]),
+        ]);
     }
 }

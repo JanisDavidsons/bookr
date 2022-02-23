@@ -6,6 +6,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property string $id
+ */
 class Book extends Model
 {
+    protected $fillable = ['title', 'description', 'author'];
 }
