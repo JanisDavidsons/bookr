@@ -11,5 +11,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Book extends Model
 {
+    /**
+     * @var string[]
+     */
+    // phpcs:ignore
     protected $fillable = ['title', 'description', 'author'];
 }

@@ -8,4 +8,9 @@ class Model
      * @var string[]
      */
     protected $hidden = [];
+
+    /**
+     * @var string[]
+     */
+    protected $fillable = [];
 }
