@@ -35,9 +35,11 @@ abstract class TestCase extends BaseTestCase
     /**
      * Asserts that the response header matches s given regular expression.
      */
-    public function seeHeaderWithRegExp(string $header, string $regex): void
+    public function seeHeaderWithRegExp(string $header, string $regex): TestCase
     {
         $this->seeHasHeader($header)
              ->assertMatchesRegularExpression($regex, $this->response->headers->get($header) ?? '');
+
+        return $this;
     }
 }

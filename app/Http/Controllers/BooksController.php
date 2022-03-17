@@ -39,15 +39,28 @@ class BooksController extends Controller
         }
     }
 
-    public function create(Request $request): JsonResponse
+    public function store(Request $request): JsonResponse
     {
         /**
-         * @var Book
+         * @var Book $book
          */
         $book = Book::query()->create($request->all());
 
         return new JsonResponse(['created' => true], 201, [
             'Location' => route('books.show', ['id' => $book->id]),
         ]);
+    }
+
+    public function put(Request $request, string $id): Book
+    {
+        /**
+         * @var Book $book
+         */
+        $book = Book::query()->findOrFail($id);
+
+        $book->fill($request->all());
+        $book->save();
+
+        return $book;
     }
 }

@@ -82,7 +82,7 @@ class BooksControllerTest extends TestCase
         ]);
     }
 
-    public function testStoreShouldRespondWith201AndLocationHeader(): void
+    public function testStoreShouldRespondWith201AndLocationHeaderWhenSuccesfull(): void
     {
         $this->post('books', [
             'id'          => 1,
@@ -92,5 +92,41 @@ class BooksControllerTest extends TestCase
         ]);
 
         $this->seeStatusCode(201)->seeHeaderWithRegExp('Location', '#/books/[\d]+$#');
+    }
+
+    public function testUpdateShouldOnlyChangeFallibleFields(): void
+    {
+        $this->notSeeInDatabase('books', [
+            'title' => 'The War of the Worlds',
+        ]);
+
+        $this->put('/books/1', [
+            'id'          => 5,
+            'title'       => 'The War of the Worlds',
+            'description' => 'The book is way better than the movie.',
+            'author'      => 'Wells, H. G.',
+        ]);
+
+        $this->seeStatusCode(200)
+            ->seeJson([
+                'id'          => 1,
+                'title'       => 'The War of the Worlds',
+                'description' => 'The book is way better than the movie.',
+                'author'      => 'Wells, H. G.',
+            ]);
+
+        $this->seeInDatabase('books', [
+            'title' => 'The War of the Worlds',
+        ]);
+    }
+
+    public function testUpdateShouldFailWithAnInvalidId(): void
+    {
+        $this->markTestIncomplete('pending');
+    }
+
+    public function testUpdateShouldNotMatchAnInvalidRoute(): void
+    {
+        $this->markTestIncomplete('pending');
     }
 }
