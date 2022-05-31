@@ -37,7 +37,7 @@ class BooksControllerTest extends TestCase
                 'id'          => 1,
                 'title'       => 'War of the Worlds',
                 'description' => 'A science fiction masterpiece about Martians invading London',
-                'author'      => 'H. G. Wells',
+                'author'      => 'Wells, H. G.',
             ]);
 
         $data = json_decode($this->response->getContent(), true);
@@ -73,7 +73,7 @@ class BooksControllerTest extends TestCase
             'id'          => 1,
             'title'       => 'The Invisible Man',
             'description' => 'An invisible man is trapped in the terror of his own creation',
-            'author'      => 'H. G. Wells',
+            'author'      => 'Wells, H. G.',
         ]);
 
         $this->seeJson(['created' => true]);
@@ -88,13 +88,13 @@ class BooksControllerTest extends TestCase
             'id'          => 1,
             'title'       => 'The Invisible Man',
             'description' => 'An invisible man is trapped in the terror of his own creation',
-            'author'      => 'H. G. Wells',
+            'author'      => 'Wells, H. G.',
         ]);
 
         $this->seeStatusCode(201)->seeHeaderWithRegExp('Location', '#/books/[\d]+$#');
     }
 
-    public function testUpdateShouldOnlyChangeFallibleFields(): void
+    public function testUpdateShouldOnlyChangeFillableFields(): void
     {
         $this->notSeeInDatabase('books', [
             'title' => 'The War of the Worlds',
